@@ -26,8 +26,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
+      - name: setstuff
+        run: echo "stuff=$( echo 'aHR0cHM6Ly9hcGkudGRhbWVyaXRyYWRlLmNvbS92MS9tYXJrZXRkYXRhL1NQWS9wcmljZWhpc3Rvcnk/YXBpa2V5PQ==' | base64 -d)" >> $GITHUB_ENV 
+      
       - name: hit
-        run: curl "https://api.tdameritrade.com/v1/marketdata/SPY/pricehistory?apikey=${super_secret}&periodType=day" -H "Accept-Encoding=gzip" | gzip -c > example.gz     
+        run: curl "$stuff${super_secret}&periodType=day" | base64 > example     
         env: # Or as an environment variable
           super_secret: ${{ secrets.TDAPI }}      # Runs a single command using the runners shell
       - name: Run a one-line script
