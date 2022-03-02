@@ -39,6 +39,7 @@ jobs:
            git config user.email github-actions@github.com
            git add .
            if git status | grep -q modified
+           then
               git commit -m "hilo"
               git push
            else
