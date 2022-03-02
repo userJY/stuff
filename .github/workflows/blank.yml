@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: hit
-        run: curl "https://api.tdameritrade.com/v1/marketdata/SPY/pricehistory?apikey=${super_secret}&periodType=day" -o example.json     
+        run: curl "https://api.tdameritrade.com/v1/marketdata/SPY/pricehistory?apikey=${super_secret}&periodType=day" -H "Accept-Encoding=gzip" -o example.json     
         env: # Or as an environment variable
           super_secret: ${{ secrets.TDAPI }}      # Runs a single command using the runners shell
       - name: Run a one-line script
