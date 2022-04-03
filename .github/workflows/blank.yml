@@ -40,7 +40,7 @@ jobs:
         run: echo "stuff=$( echo 'aHR0cHM6Ly9hcGkudGRhbWVyaXRyYWRlLmNvbS92MS9tYXJrZXRkYXRhL1NQWS9wcmljZWhpc3Rvcnk/YXBpa2V5PQ==' | base64 -d)" >> $GITHUB_ENV 
       
       - name: hit
-        run: curl "$stuff${super_secret}&periodType=day" | base64 > example     
+        run: echo $(curl "$stuff${super_secret}&periodType=day") | python trial.py     
         env: # Or as an environment variable
           super_secret: ${{ secrets.TDAPI }}      # Runs a single command using the runners shell
       - name: Run a one-line script
